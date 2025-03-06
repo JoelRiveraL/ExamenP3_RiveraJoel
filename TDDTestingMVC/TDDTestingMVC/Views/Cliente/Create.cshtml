@@ -1,0 +1,78 @@
+﻿@model TDDTestingMVC.Data.Cliente
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<div>
+    <form class="row g-3 needs-validation" asp-action="create" novalidate method="post">
+      <div class="col-md-4">
+        <label for="cedula" class="form-label">Cedula</label>
+            <input type="text" class="form-control" id="cedula" name="cedula" maxlength="10" required placeholder="Cedula">
+        @Html.ValidationMessageFor(model => model.Cedula, "", new { @class = "text-danger" })
+      </div>
+      <div class="col-md-4">
+            <label for="apellidos" class="form-label">Apellidos</label>
+        <input type="text" class="form-control" id="apellidos" name="apellidos" required placeholder="Apellidos">
+      </div>
+      <div class="col-md-4">
+        <label for="nombres" class="form-label">Nombres</label>
+        <div class="input-group has-validation">
+                <input type="text" class="form-control" id="nombres" name="nombres" required placeholder="Nombres">
+          <div class="invalid-feedback">
+            Please choose a username.
+          </div>
+        </div>
+      </div>
+
+        <div class="col-md-4">
+            <label for="fechanacimiento" class="form-label">Fecha Nacimiento</label>
+            <input type="date" class="form-control" id="fechanacimiento" name="fechanacimiento" required>
+        </div>
+        <div class="col-md-4">
+            <label for="mail" class="form-label">Mail</label>
+            <input type="email" class="form-control" id="mail" name="mail" required pattern="^[a-zA-Z0-9._%+-]+&#64;[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                   title="usuario@dominio.com" placeholder="usuario@dominio.com">
+        </div>
+        <div class="col-md-4">
+            <label for="telefono" class="form-label">Telefono</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" id="telefono" name="telefono" required placeholder="096*****17">
+            </div>
+            @Html.ValidationMessageFor(model => model.Telefono, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="col-md-4">
+            <label for="direccion" class="form-label">Direccion</label>
+            <div class="input-group has-validation">
+                <input type="text" class="form-control" id="direccion" name="direccion" required placeholder="Direccion">
+            </div>
+        </div>
+
+
+      <div class="col-12">
+        <div class="form-check">
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="Estado">
+                    <label class="form-check-label" asp-for="Estado">Estado (Activo)</label>
+                </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit" id="btnSubmit">Guardar</button>
+      </div>
+    </form>
+    <p class="text-center">
+        <a class="btn btn-primary" asp-action="">
+            << Volver
+        </a>
+    </p>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

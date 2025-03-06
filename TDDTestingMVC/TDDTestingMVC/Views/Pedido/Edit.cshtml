@@ -1,0 +1,60 @@
+﻿@model TDDTestingMVC.Data.Pedido
+
+@{
+    ViewData["Title"] = "Editar Pedido";
+}
+
+<h1>Editar Pedido</h1>
+
+<div>
+    <form class="row g-3 needs-validation" asp-action="Edit" method="post">
+        <input type="hidden" asp-for="PedidoID" /> 
+
+        <div class="col-md-4">
+            <label for="clienteId" class="form-label">Cliente</label>
+            <select class="form-control" id="clienteId" name="ClienteID" required>
+                @foreach (var cliente in ViewBag.Clientes)
+                {
+                    <option value="@cliente.Codigo" selected="@(cliente.Codigo == Model.ClienteID)">
+                        @cliente.Nombres @cliente.Apellidos
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <label for="fechaPedido" class="form-label">Fecha del Pedido</label>
+            <input type="date" class="form-control" id="fechaPedido" name="FechaPedido" value="@Model.FechaPedido.ToString("yyyy-MM-dd")" required>
+        </div>
+
+        <div class="col-md-4">
+            <label for="total" class="form-label">Total</label>
+            <input type="number" class="form-control" id="monto" name="Monto" step="0.01" value="@Model.Monto" required>
+        </div>
+
+        <div class="col-12">
+            <div class="form-check">
+                <div class="mb-3 form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="Estado">
+                    <label class="form-check-label" asp-for="Estado">Estado (Completado)</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit" id="btnSubmit">Guardar Cambios</button>
+        </div>
+    </form>
+
+    <p class="text-center">
+        <a class="btn btn-primary" asp-action="Index">
+            << Volver
+        </a>
+    </p>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

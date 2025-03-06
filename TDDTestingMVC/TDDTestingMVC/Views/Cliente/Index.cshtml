@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TDDTestingMVC.Data.Cliente>
+
+@{
+    ViewData["Title"] = "Lista de Clientes";
+}
+
+<h2>Lista de Clientes</h2>
+@if (!ViewData.ModelState.IsValid)
+{
+    <script>
+        alert("@Html.Raw(ViewData.ModelState.Values.FirstOrDefault()?.Errors.FirstOrDefault()?.ErrorMessage)");
+    </script>
+}
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Cédula</th>
+                <th>Apellidos</th>
+                <th>Nombres</th>
+                <th>Fecha Nacimiento</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Dirección</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cliente in Model)
+            {
+                <tr>
+                    <td>@cliente.Codigo</td>
+                    <td>@cliente.Cedula</td>
+                    <td>@cliente.Apellidos</td>
+                    <td>@cliente.Nombres</td>
+                    <td>@cliente.FechaNacimiento.ToString("yyyy-MM-dd")</td>
+                    <td>@cliente.Mail</td>
+                    <td>@cliente.Telefono</td>
+                    <td>@cliente.Direccion</td>
+                    <td>@(cliente.Estado ? "Activo" : "Inactivo")</td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@cliente.Codigo">Editar</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@cliente.Codigo">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p class="text-center">
+        <a class="btn btn-primary" asp-action="Create">
+            Crear cliente
+        </a>
+    </p>
+</div>

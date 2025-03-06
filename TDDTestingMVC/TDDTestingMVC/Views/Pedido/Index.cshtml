@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TDDTestingMVC.Data.Pedido>
+
+@{
+    ViewData["Title"] = "Lista de Pedidos";
+}
+
+<h2>Lista de Pedidos</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <script>
+        alert("@Html.Raw(ViewData.ModelState.Values.FirstOrDefault()?.Errors.FirstOrDefault()?.ErrorMessage)");
+    </script>
+}
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Total</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pedido in Model)
+            {
+                <tr>
+                    <td>@pedido.PedidoID</td>
+                    <td>@pedido.ClienteID</td>
+                    <td>@pedido.FechaPedido.ToString("yyyy-MM-dd")</td>
+                    <td>$@pedido.Monto.ToString("F2")</td>
+                    <td>@pedido.Estado</td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@pedido.PedidoID">Editar</a>
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@pedido.PedidoID">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p class="text-center">
+        <a class="btn btn-primary" asp-action="Create">
+            Crear pedido
+        </a>
+    </p>
+</div>

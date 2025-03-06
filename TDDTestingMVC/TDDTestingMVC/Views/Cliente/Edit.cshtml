@@ -1,0 +1,62 @@
+﻿@model TDDTestingMVC.Data.Cliente
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<div>
+    <form class="row g-3 needs-validation" asp-action="Edit" method="post" novalidate>
+        <input type="hidden" asp-for="Codigo" />
+
+        <div class="col-md-4">
+            <label for="cedula" class="form-label">Cedula</label>
+            <input type="text" class="form-control" id="cedula" name="Cedula" value="@Model.Cedula" maxlength="10" required>
+        </div>
+        <div class="col-md-4">
+            <label for="apellidos" class="form-label">Apellidos</label>
+            <input type="text" class="form-control" id="apellidos" name="Apellidos" value="@Model.Apellidos" required>
+        </div>
+        <div class="col-md-4">
+            <label for="nombres" class="form-label">Nombres</label>
+            <input type="text" class="form-control" id="nombres" name="Nombres" value="@Model.Nombres" required>
+        </div>
+        <div class="col-md-4">
+            <label for="fechanacimiento" class="form-label">Fecha Nacimiento</label>
+            <input type="date" class="form-control" id="fechanacimiento" name="FechaNacimiento" value="@Model.FechaNacimiento.ToString("yyyy-MM-dd")" required>
+        </div>
+        <div class="col-md-4">
+            <label for="mail" class="form-label">Mail</label>
+            <input type="email" class="form-control" id="mail" name="Mail" value="@Model.Mail" required>
+        </div>
+        <div class="col-md-4">
+            <label for="telefono" class="form-label">Telefono</label>
+            <input type="text" class="form-control" id="telefono" name="Telefono" value="@Model.Telefono" required>
+        </div>
+        <div class="col-md-4">
+            <label for="direccion" class="form-label">Direccion</label>
+            <input type="text" class="form-control" id="direccion" name="Direccion" value="@Model.Direccion" required>
+        </div>
+        <div class="col-12">
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" asp-for="Estado">
+                <label class="form-check-label" asp-for="Estado">Estado (Activo)</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <button class="btn btn-primary" id="btnSubmit" type="submit">Guardar</button>
+        </div>
+    </form>
+    <p class="text-center">
+        <a class="btn btn-secondary" asp-action="Index">
+            << Volver
+        </a>
+    </p>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
